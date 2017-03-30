@@ -48,7 +48,11 @@ public class GameManager {
         checkGameState(board);
         System.out.println("HvH");
     }
-    public static void newGameHvC(){
+    public static void newGameHvC() throws QuitGameException{
+        Board board = new Board();
+        HumanPlayer humanPlayer = new HumanPlayer();
+        ComputerPlayer computerPlayer = new ComputerPlayer();
+        humanPlayer.getMove(board, 1);
         System.out.println("HvC");
     }
     public static void loadGame(){
