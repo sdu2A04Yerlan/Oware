@@ -54,11 +54,7 @@ public class GameManager {
     public static void loadGame(){
         System.out.println("Load");
     }
-
     private static void checkGameState(Board board) {
         
     }
-    
-    
-    
 }
