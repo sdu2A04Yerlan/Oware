@@ -5,8 +5,6 @@
  */
 package owari;
 
-import java.io.BufferedReader;
-import java.io.Reader;
 import java.util.Scanner;
 import model.Board;
 
@@ -15,9 +13,10 @@ import model.Board;
  * @author Yerlan
  */
 public class GameManager {
+    private static GameManager gameManager;
     public static void main(String[] args) {
-        GameManager gm = new GameManager();
-        gm.mainMenu();
+        gameManager = new GameManager();
+        gameManager.mainMenu();
     }
     public void mainMenu(){
         Scanner scanner = new Scanner(System.in);
@@ -32,10 +31,10 @@ public class GameManager {
                 case 1: newGameHvH();break;
                 case 2: newGameHvC(); break;
                 case 3: loadGame(); break;
-                default: System.out.println("please enter one of the options!"); mainMenu();
+                //default: System.out.println("please enter one of the options!"); mainMenu();
         }
         }catch(Exception e){
-            System.out.println("please enter one of the options!");
+            System.out.println("please enter one of the options!"+e);
             mainMenu();
         }
     }
@@ -44,8 +43,8 @@ public class GameManager {
         Board board = new Board();
         HumanPlayer player1 = new HumanPlayer();
         HumanPlayer player2 = new HumanPlayer();
-        player1.getMove(board, 1);
-        checkGameState(board);
+        //player1.getMove(board, 1);
+        //checkGameState(board);
         System.out.println("HvH");
     }
     public static void newGameHvC() throws QuitGameException{
