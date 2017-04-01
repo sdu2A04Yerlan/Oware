@@ -13,9 +13,9 @@ import model.Board;
  * @author Yerlan
  */
 public class GameManager {
-    private static GameManager gameManager;
+    
     public static void main(String[] args) {
-        gameManager = new GameManager();
+        GameManager gameManager = new GameManager();
         gameManager.mainMenu();
     }
     public void mainMenu(){
@@ -45,6 +45,7 @@ public class GameManager {
         HumanPlayer player2 = new HumanPlayer();
         //player1.getMove(board, 1);
         //checkGameState(board);
+
         System.out.println("HvH");
     }
     public static void newGameHvC() throws QuitGameException{
