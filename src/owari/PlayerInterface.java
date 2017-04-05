@@ -5,6 +5,7 @@
  */
 package owari;
 
+import owari.Exceptions.QuitGameException;
 import model.Board;
 
 /**

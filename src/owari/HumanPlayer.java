@@ -5,16 +5,29 @@
  */
 package owari;
 
+import java.util.Scanner;
+import owari.Exceptions.QuitGameException;
 import model.Board;
 
 /**
  *
  * @author Yerlan
  */
-public class HumanPlayer implements PlayerInterface{
-
+public class HumanPlayer implements PlayerInterface {
+    private boolean legalMove = false;
     @Override
     public int getMove(Board b, int playerNum) throws QuitGameException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        b.toString();
+        
+        Scanner sc = new Scanner(System.in);
+        while (!legalMove) {
+            if (sc.nextInt() < 1 || sc.nextInt() > 6) {
+                return sc.nextInt();
+               // legalMove = true;
+            } else {
+                System.out.println("That was wrong, make new move");
+            }
+        }
+        return 0;
     }
 }
