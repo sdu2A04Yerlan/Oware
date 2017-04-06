@@ -7,12 +7,8 @@ package owari;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import owari.Exceptions.QuitGameException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Board;
 import owari.Exceptions.IllegalMoveException;
 
@@ -21,6 +17,7 @@ import owari.Exceptions.IllegalMoveException;
  * @author Yerlan
  */
 public class GameManager {
+
     private Scanner ss = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -56,16 +53,21 @@ public class GameManager {
 
     public static void newGameHvH() throws QuitGameException {
         Board board = new Board();
+        int currentPlayerNum = 1;
+        HumanPlayer currentPlayer = new HumanPlayer();
         board.toString();
         while (board.getResult() == 0) {
+            int nextPlayerNum = 3 - currentPlayerNum;
             Board bclone = board.clone();
-            HumanPlayer player1 = new HumanPlayer();
-            HumanPlayer player2 = new HumanPlayer();
+            int move = currentPlayer.getMove(bclone, currentPlayerNum);
             try {
-                board.makeMove(0, player1.getMove(board, 0));
+                board.makeMove(currentPlayerNum, move);
+                currentPlayerNum++;
             } catch (IllegalMoveException ex) {
-                Logger.getLogger(GameManager.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+                currentPlayerNum--;
             }
+            currentPlayerNum = nextPlayerNum;
         }
         //player1.getMove(board, 1);
         //checkGameState(board);
@@ -77,18 +79,43 @@ public class GameManager {
         HumanPlayer humanPlayer = new HumanPlayer();
         ComputerPlayer computerPlayer = new ComputerPlayer();
         try {
-            board.makeMove(0, 0);
+            board.makeMove(1, 1);
         } catch (IllegalMoveException e) {
-            e = new IllegalMoveException(0, "");
+            System.out.println(e);
         }
         System.out.println("HvC");
     }
 
-    public void loadGame() throws FileNotFoundException{
+    public void loadGame() throws FileNotFoundException, QuitGameException {
+        System.out.println("Load game");
         File f = selectLoadFile();
+        //System.out.println(f.getName());
         Scanner fs = new Scanner(f);
         int gameType = fs.nextInt();
-        
+        int currentPlayerNum = fs.nextInt();
+        int[] score = new int[2];
+        score[0] = fs.nextInt();
+        score[1] = fs.nextInt();
+        int[] houses = new int[12];
+        for (int i = 0; i < 12; i++) {
+            houses[i] = fs.nextInt();
+        }
+        Board b = new Board(houses, score);
+        b.toString();
+        PlayerInterface currentPlayer = new HumanPlayer();
+        while (b.getResult() == 0) {
+            int nextPlayerNum = 3 - currentPlayerNum;
+            Board bclone = b.clone();
+            int move = currentPlayer.getMove(bclone, currentPlayerNum);
+            try {
+                b.makeMove(currentPlayerNum, move);
+                currentPlayerNum++;
+            } catch (IllegalMoveException ex) {
+                System.out.println(ex);
+                currentPlayerNum--;
+            }
+            currentPlayerNum = nextPlayerNum;
+        }
     }
 
     private File selectLoadFile() {
@@ -104,6 +131,7 @@ public class GameManager {
             }
 
         }
+        System.out.println("Please select file to load, enter number");
         int s = ss.nextInt();
         //File f = filesList[s];
         return filesList[s];
