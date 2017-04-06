@@ -11,6 +11,6 @@ package owari.Exceptions;
  */
 public class IllegalMoveException extends Exception{
     public IllegalMoveException(int number, String exception){
-        System.out.println("Exception number" + number + " /n " + exception);
+        System.out.println("Exception number: " + number + " /n " + exception);
     }
 }

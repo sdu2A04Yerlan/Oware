@@ -14,20 +14,21 @@ import model.Board;
  * @author Yerlan
  */
 public class HumanPlayer implements PlayerInterface {
-    private boolean legalMove = false;
+
     @Override
     public int getMove(Board b, int playerNum) throws QuitGameException {
-        b.toString();
-        
+        //b.toString();
+        boolean legalMove = false;
         Scanner sc = new Scanner(System.in);
+        int i = sc.nextInt();
         while (!legalMove) {
-            if (sc.nextInt() < 1 || sc.nextInt() > 6) {
-                return sc.nextInt();
-               // legalMove = true;
+            if (i >= 1 && i <= 6) {
+                legalMove = true;
+                return i;
             } else {
                 System.out.println("That was wrong, make new move");
+                i = sc.nextInt();
             }
-        }
-        return 0;
+        }        return 0;
     }
 }

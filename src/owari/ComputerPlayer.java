@@ -16,7 +16,8 @@ public class ComputerPlayer implements PlayerInterface{
 
     @Override
     public int getMove(Board b, int playerNum) throws QuitGameException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // here we make comp player smart
+        return 0; //To change body of generated methods, choose Tools | Templates.
     }
     
 }
