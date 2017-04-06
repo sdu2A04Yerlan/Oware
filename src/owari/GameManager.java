@@ -84,8 +84,11 @@ public class GameManager {
         System.out.println("HvC");
     }
 
-    public void loadGame(){
+    public void loadGame() throws FileNotFoundException{
         File f = selectLoadFile();
+        Scanner fs = new Scanner(f);
+        int gameType = fs.nextInt();
+        
     }
 
     private File selectLoadFile() {

@@ -16,7 +16,7 @@ public class Board {
     private int[] houses;
     private int[] score;
     private int resultOfGame;
-
+    priavte ArrayList<Board> gameHistory;
     public Board() {
         houses = new int[12];
         score = new int[2];
@@ -63,13 +63,7 @@ public class Board {
         switch (player) {
             case 0:
                 if (houses[position - 1] > 0) {
-                    System.out.println(houses[position]);
-                    int length = houses[position - 1];
-                    houses[position - 1] = 0;
-                    for (int i = (position); i < length + 1; i++) {
-                        houses[i] = houses[i] + 1;
-                        //houses[i+1] = 1;
-                    }
+                    
                     this.toString();
                 } else {
                     IllegalMoveException exception = new IllegalMoveException(1, "the move is illegal, no seeds there");
@@ -89,6 +83,15 @@ public class Board {
 
         } else {
         }
+    }
+
+    public int houseToArrayPossition(int house, int player) {
+        if (player == 1) {
+            return house - 1;
+        } else if (player == 2) {
+            return 5 + house;
+        }
+        return 99;
     }
 
     public String toString() { //PRINTS THE STATE OF THE BOARD
