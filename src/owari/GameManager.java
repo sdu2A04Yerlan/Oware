@@ -46,8 +46,8 @@ public class GameManager {
                 //default: System.out.println("please enter one of the options!"); mainMenu();
             }
         } catch (Exception e) {
-            System.out.println("please enter one of the options!" + e);
-            mainMenu();
+            System.out.println(e);
+            //mainMenu();
         }
     }
 
@@ -55,7 +55,7 @@ public class GameManager {
         Board board = new Board();
         int currentPlayerNum = 1;
         HumanPlayer currentPlayer = new HumanPlayer();
-        board.toString();
+        //board.toString();
         while (board.getResult() == 0) {
             int nextPlayerNum = 3 - currentPlayerNum;
             Board bclone = board.clone();
@@ -89,9 +89,9 @@ public class GameManager {
     public void loadGame() throws FileNotFoundException, QuitGameException {
         System.out.println("Load game");
         File f = selectLoadFile();
-        //System.out.println(f.getName());
         Scanner fs = new Scanner(f);
         int gameType = fs.nextInt();
+        System.out.println(gameType);
         int currentPlayerNum = fs.nextInt();
         int[] score = new int[2];
         score[0] = fs.nextInt();

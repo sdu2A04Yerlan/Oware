@@ -73,16 +73,17 @@ public class Board {
         }
     }
 
-    public int getSeeds(int house, int playerNum) throws IllegalMoveException {
+    public int getSeeds(int house, int playerNum) {
         if (house >= 1 && house <= 6) {
             if (playerNum >= 1 && playerNum <= 2) {
                 return houses[houseToArrayPossition(house, playerNum)];
             } else {
-                throw new IllegalArgumentException("Invalid input: player number not allowed");
+                System.out.println("There is no another player");
             }
         } else {
-            throw new IllegalMoveException(" ");
+            System.out.println("Choose correct hoyse");
         }
+        return 100;
     }
 
     public void setSeeds(int seeds, int house, int playerNum) throws IllegalMoveException {
@@ -117,7 +118,7 @@ public class Board {
     }
 
     public String toString() { //PRINTS THE STATE OF THE BOARD
-        System.out.println("Player0:" + score[0]);
+        System.out.println("Player 1:" + score[0]);
         System.out.println("6    5    4    3    2    1");
         System.out.println("--------------------------");
 
@@ -131,7 +132,7 @@ public class Board {
         }
         System.out.println("\n--------------------------");
         System.out.println("1    2    3    4    5    6");
-        System.out.println("Player1:" + score[1]);
+        System.out.println("Player 2:" + score[1]);
         return null;
     }
 

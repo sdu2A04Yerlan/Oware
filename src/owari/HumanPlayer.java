@@ -36,7 +36,15 @@ public class HumanPlayer implements PlayerInterface {
             FileWriter fw;
             try {
                 fw = new FileWriter(savefile);
-                fw.write(input);
+                fw.append(1+"\n");//game type
+                fw.append(playerNum+"\n");//current player number
+                int[] score = b.getScore();
+                fw.append(score[0]+"\n");//score 1
+                fw.append(score[1]+"\n");//score 2
+                int[] house = b.getHouses();
+                for (int i = 0; i < house.length; i++) {
+                    fw.append(house[i]+"\n");//game type
+                }
                 fw.close();
                 throw new QuitGameException("saved");
                 //System.exit(1);
@@ -46,22 +54,25 @@ public class HumanPlayer implements PlayerInterface {
         } else {
             int i = new Integer(input);
             while (!legalMove) {
-                if (i >= 1 && i <= 6) {
-                    try {
-                        int seeds = b.getSeeds(b.houseToArrayPossition(i, playerNum), playerNum);
+                try {
+
+                    if (i >= 1 && i <= 6) {
+                        int seeds = b.getSeeds(i, playerNum);
                         if (seeds > 0) {
                             legalMove = true;
                             return i;
-                        }else{
-                            System.out.println("No seeds");
-                        }
-                    } catch (IllegalMoveException ex) {
-                        
-                    }
+                        } else {
 
-                } else {
-                    System.out.println("That was wrong, make new move");
-                    i = sc.nextInt();
+                            i = sc.nextInt();
+                            System.out.println("NO SEED, try again");
+                            //throw new IllegalMoveException("No seeds in this house");
+                        }
+
+                    } else {
+                        i = sc.nextInt();
+                        throw new IllegalMoveException("Enter correct number of house");
+                    }
+                } catch (Exception e) {
                 }
             }
             return 0;
