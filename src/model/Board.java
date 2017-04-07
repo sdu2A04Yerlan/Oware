@@ -104,7 +104,9 @@ public class Board {
         int seeds = getSeeds(position, player);
         if (seeds > 0) {
             setSeeds(0, position, player);
+            
         } else {
+            System.out.println("NO SEEDS");
         }
     }
 
